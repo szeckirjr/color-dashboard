@@ -39,7 +39,7 @@ export default function ColorDashboard({
             >
               <PhotoshopPicker
                 color={selectedColor}
-                onChange={(color) => setSelectedColor(color)}
+                onChange={(color) => setSelectedColor(color.hex)}
               />
               <Box
                 sx={{
