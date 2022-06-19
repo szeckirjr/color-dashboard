@@ -126,39 +126,57 @@ export default function Dashboard() {
               <LightModeIcon fontSize="large" />
             )}
           </IconButton>
-          <IconButton size="large">
-            <AbcIcon fontSize="large" />
-          </IconButton>
         </Box>
       </Box>
-      <Box
+      <Stack
+        direction="row"
         sx={{
-          borderRadius: "5px",
-          "&:hover": {
-            cursor: "pointer",
-            borderRadius: "15px",
-          },
-          transition: "all 0.3s ease-in-out",
+          alignItems: "flex-start",
         }}
-        //height="45px"
-        bgcolor={selectedCol}
-        mb={4}
-        onClick={() => selectColor(selectedCol, setOpen)}
-        display="flex"
-        justifyContent="space-evenly"
-        py={2}
       >
-        {showText && (
-          <>
-            <Typography variant="h5" fontWeight="bold" color="white">
-              White Text
-            </Typography>
-            <Typography variant="h5" fontWeight="bold" color="black">
-              Black Text
-            </Typography>
-          </>
-        )}
-      </Box>
+        <Box
+          sx={{
+            borderRadius: "5px",
+            "&:hover": {
+              cursor: "pointer",
+              borderRadius: "15px",
+            },
+            transition: "all 0.4s ease-in-out",
+          }}
+          //height="45px"
+          bgcolor={selectedCol}
+          mb={4}
+          onClick={() => selectColor(selectedCol, setOpen)}
+          display="flex"
+          justifyContent="space-evenly"
+          py={2}
+          flexGrow={1}
+        >
+          <Typography
+            sx={{
+              visibility: showText ? "visible" : "hidden",
+            }}
+            variant="h5"
+            fontWeight="bold"
+            color="white"
+          >
+            White Text
+          </Typography>
+          <Typography
+            sx={{
+              visibility: showText ? "visible" : "hidden",
+            }}
+            variant="h5"
+            fontWeight="bold"
+            color="black"
+          >
+            Black Text
+          </Typography>
+        </Box>
+        <IconButton size="large">
+          <AbcIcon fontSize="large" onClick={() => setShowText(!showText)} />
+        </IconButton>
+      </Stack>
       <ColorDashboard
         selectedColor={selectedCol}
         setSelectedColor={setSelectedCol}

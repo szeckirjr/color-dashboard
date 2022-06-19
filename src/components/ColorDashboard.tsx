@@ -35,6 +35,7 @@ export default function ColorDashboard({
                 position: "relative",
                 color: "black",
                 cursor: "pointer",
+                marginRight: "12px",
               }}
             >
               <PhotoshopPicker
