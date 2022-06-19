@@ -1,11 +1,5 @@
-import { Box, Grid, Stack, Typography } from "@mui/material";
-import {
-  CirclePicker,
-  GithubPicker,
-  MaterialPicker,
-  PhotoshopPicker,
-  SwatchesPicker,
-} from "react-color";
+import { Box, Stack, Typography } from "@mui/material";
+import { PhotoshopPicker } from "react-color";
 import { initial } from ".";
 import { selectColor } from "../utils/functions";
 import ColorBadge from "./ColorBadge";
