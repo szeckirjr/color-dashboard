@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import { PhotoshopPicker } from "react-color";
+import { ColorResult, PhotoshopPicker } from "react-color";
 import { selectColor } from "../utils/functions";
 
 export default function MainColorPicker({
@@ -7,8 +7,8 @@ export default function MainColorPicker({
   setSelectedColor,
   setOpen,
 }: {
-  selectedColor: string;
-  setSelectedColor: (color: string) => void;
+  selectedColor: ColorResult;
+  setSelectedColor: (color: ColorResult) => void;
   setOpen: (val: boolean) => void;
 }) {
   return (
@@ -21,14 +21,14 @@ export default function MainColorPicker({
       }}
     >
       <PhotoshopPicker
-        color={selectedColor}
-        onChange={(color) => setSelectedColor(color.hex)}
+        color={selectedColor.hex}
+        onChange={(color) => setSelectedColor(color)}
       />
       <Box
         sx={{
           height: "60px",
           width: "110px",
-          bgcolor: selectedColor,
+          bgcolor: selectedColor.hex,
           position: "absolute",
           top: "35px",
           right: "10px",
@@ -37,10 +37,17 @@ export default function MainColorPicker({
           justifyContent: "center",
           alignItems: "center",
           cursor: "pointer",
+          color:
+            selectedColor.rgb.r * 0.299 +
+              selectedColor.rgb.g * 0.587 +
+              selectedColor.rgb.b * 0.114 >
+            186
+              ? "black"
+              : "white",
         }}
-        onClick={() => selectColor(selectedColor, setOpen)}
+        onClick={() => selectColor(selectedColor.hex, setOpen)}
       >
-        <Typography>{selectedColor}</Typography>
+        <Typography>{selectedColor.hex}</Typography>
       </Box>
       <Box
         sx={{

@@ -6,30 +6,49 @@ import CloseIcon from "@mui/icons-material/Close";
 
 import Header from "./Header";
 import ColorViewer from "./ColorViewer";
+import { ColorResult } from "react-color";
 
 export const initial = [
   "#03071e",
   "#370617",
   "#6a040f",
   "#9d0208",
-  "#d00000",
+
   "#dc2f02",
   "#e85d04",
-  "#ff6d00",
+
   "#ff7900",
   "#ff8500",
   "#ff9100",
   "#f48c06",
-  "#ff9e00",
+
   "#faa307",
   "#ffba08",
+];
+
+export const initialObj: ColorResult[] = [
+  {
+    hex: "#d00000",
+    rgb: { r: 208, g: 0, b: 0, a: 1 },
+    hsl: { h: 0, s: 100, l: 82, a: 1 },
+  },
+  {
+    hex: "#ff6d00",
+    rgb: { r: 255, g: 109, b: 0, a: 1 },
+    hsl: { h: 26, s: 100, l: 100, a: 1 },
+  },
+  {
+    hex: "#ff9e00",
+    rgb: { r: 255, g: 158, b: 0, a: 1 },
+    hsl: { h: 33, s: 100, l: 100, a: 1 },
+  },
 ];
 
 export default function Dashboard() {
   const theme = useTheme();
   const { mode } = theme.palette;
-  var randColor = initial[Math.floor(Math.random() * initial.length)];
-  const [selectedCol, setSelectedCol] = useState(randColor);
+  var randColor = initialObj[Math.floor(Math.random() * initialObj.length)];
+  const [selectedCol, setSelectedCol] = useState<ColorResult>(randColor);
   const [open, setOpen] = useState(false);
 
   const colorMode = useContext(ColorModeContext);
@@ -70,7 +89,7 @@ export default function Dashboard() {
       }}
     >
       <Header mode={mode} toggleClick={colorMode.toggleColorMode} />
-      <ColorViewer selectedCol={selectedCol} setOpen={setOpen} />
+      <ColorViewer selectedCol={selectedCol.hex} setOpen={setOpen} />
       <ColorDashboard
         selectedColor={selectedCol}
         setSelectedColor={setSelectedCol}

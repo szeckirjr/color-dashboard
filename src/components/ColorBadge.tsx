@@ -1,15 +1,17 @@
 import { Box } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import { ColorResult } from "react-color";
 
 export default function ColorBadge({
   color,
   onClick,
   selectedColor,
 }: {
-  color: string;
-  onClick: (val: string) => void;
+  color: ColorResult;
+  onClick: (val: ColorResult) => void;
   selectedColor: string;
 }) {
+  console.log(color.hsl.h);
   return (
     <Box
       sx={{
@@ -17,7 +19,7 @@ export default function ColorBadge({
         borderRadius: "10px",
         height: "50px",
         width: "50px",
-        bgcolor: color,
+        bgcolor: color.hex,
         cursor: "pointer",
         scale: 1,
         "&:hover": {
@@ -29,10 +31,14 @@ export default function ColorBadge({
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        color:
+          color.rgb.r * 0.299 + color.rgb.g * 0.587 + color.rgb.b * 0.114 > 186
+            ? "black"
+            : "white",
       }}
       onClick={() => onClick(color)}
     >
-      {color === selectedColor && <CheckCircleIcon />}
+      {color.hex === selectedColor && <CheckCircleIcon />}
     </Box>
   );
 }

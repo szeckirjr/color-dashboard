@@ -1,5 +1,6 @@
 import { Box, Stack, Typography } from "@mui/material";
-import { initial } from "../containers";
+import { ColorResult } from "react-color";
+import { initialObj } from "../containers";
 import ColorBadge from "./ColorBadge";
 import MainColorPicker from "./MainColorPicker";
 
@@ -8,8 +9,8 @@ export default function ColorDashboard({
   setSelectedColor,
   setOpen,
 }: {
-  selectedColor: string;
-  setSelectedColor: (color: string) => void;
+  selectedColor: ColorResult;
+  setSelectedColor: (color: ColorResult) => void;
   setOpen: (val: boolean) => void;
 }) {
   //   const theme = useTheme();
@@ -36,11 +37,11 @@ export default function ColorDashboard({
                 flexGrow: 1,
               }}
             >
-              {initial.map((color) => (
+              {initialObj.map((color) => (
                 <ColorBadge
                   onClick={setSelectedColor}
                   color={color}
-                  selectedColor={selectedColor}
+                  selectedColor={selectedColor.hex}
                 />
               ))}
             </Box>
