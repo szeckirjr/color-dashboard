@@ -1,64 +1,88 @@
-import { Stack, Box, Typography, IconButton } from "@mui/material";
-import { selectColor } from "../utils/functions";
+import { Stack, Box, Typography, IconButton, Tooltip } from "@mui/material";
+import {
+  selectColor,
+  useReallySmallScreen,
+  useSmallScreen,
+} from "../utils/functions";
 import AbcIcon from "@mui/icons-material/Abc";
 import { useState } from "react";
+import { Colord } from "colord";
 
 export default function ColorViewer({
   selectedCol,
   setOpen,
 }: {
-  selectedCol: string;
+  selectedCol: Colord;
   setOpen: (val: boolean) => void;
 }) {
   const [showText, setShowText] = useState(false);
+
+  const isReallySmallScreen = useReallySmallScreen();
+  const isSmallScreen = useSmallScreen();
+
+  const formattedColor = selectedCol.isLight()
+    ? selectedCol.toHex()
+    : "darkgray";
 
   return (
     <Stack
       direction="row"
       sx={{
-        alignItems: "flex-start",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
       }}
     >
-      <Box
-        sx={{
-          borderRadius: "5px",
-          "&:hover": {
-            cursor: "pointer",
-            borderRadius: "15px",
-          },
-          transition: "all 0.4s ease-in-out",
-        }}
-        //height="45px"
-        bgcolor={selectedCol}
-        mb={4}
-        onClick={() => selectColor(selectedCol, setOpen)}
-        display="flex"
-        justifyContent="space-evenly"
-        py={2}
-        flexGrow={1}
+      <Tooltip
+        arrow
+        title="Click to copy"
+        placement={isSmallScreen ? "bottom" : "top"}
+        disableInteractive
       >
-        <Typography
+        <Box
           sx={{
-            opacity: showText ? 1 : 0,
+            borderRadius: "15px",
+            "&:hover": {
+              cursor: "pointer",
+              boxShadow: "0 0 50px 1px " + formattedColor,
+            },
             transition: "all 0.4s ease-in-out",
           }}
-          variant="h5"
-          fontWeight="bold"
-          color="white"
+          //height="45px"
+          bgcolor={selectedCol.toHex()}
+          mb={4}
+          onClick={() => selectColor(selectedCol, setOpen)}
+          display="flex"
+          justifyContent="space-evenly"
+          py={2}
+          flexGrow={1}
         >
-          White Text
-        </Typography>
-        <Typography
-          sx={{ opacity: showText ? 1 : 0, transition: "all 0.4s ease-in-out" }}
-          variant="h5"
-          fontWeight="bold"
-          color="black"
-        >
-          Black Text
-        </Typography>
-      </Box>
-      <IconButton size="large">
-        <AbcIcon fontSize="large" onClick={() => setShowText(!showText)} />
+          <Typography
+            sx={{
+              opacity: showText ? 1 : 0,
+              transition: "all 0.4s ease-in-out",
+            }}
+            variant={isReallySmallScreen ? "h6" : "h5"}
+            fontWeight="bold"
+            color="white"
+          >
+            White{!isReallySmallScreen && " Text"}
+          </Typography>
+          <Typography
+            sx={{
+              opacity: showText ? 1 : 0,
+              transition: "all 0.4s ease-in-out",
+            }}
+            variant={isReallySmallScreen ? "h6" : "h5"}
+            fontWeight="bold"
+            color="black"
+          >
+            Black{!isReallySmallScreen && " Text"}
+          </Typography>
+        </Box>
+      </Tooltip>
+      <IconButton size="large" onClick={() => setShowText(!showText)}>
+        <AbcIcon fontSize="large" />
       </IconButton>
     </Stack>
   );
