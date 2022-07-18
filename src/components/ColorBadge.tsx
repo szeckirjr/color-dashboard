@@ -23,14 +23,13 @@ export default function ColorBadge({
         cursor: "pointer",
         "&:hover": {
           borderRadius: 0,
-          flexGrow: 2,
+          flexGrow: 3,
         },
         transition: "all 0.05s ease-in-out",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         flexGrow: 1,
-        alignContent: "stretch",
       }}
       onClick={() => onClick(color)}
     >

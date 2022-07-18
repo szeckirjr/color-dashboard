@@ -63,7 +63,7 @@ export default function ColorDashboard({
         </Stack>
       </Stack>
       <Stack
-        direction="row"
+        direction={isSmallScreen ? "column" : "row"}
         sx={{
           width: "100%",
           display: "flex",
