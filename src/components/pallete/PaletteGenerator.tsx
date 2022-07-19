@@ -2,7 +2,6 @@ import { Box, IconButton, Stack, Tooltip, Typography } from "@mui/material";
 import { Colord, colord } from "colord";
 import { useState } from "react";
 import { useReallySmallScreen } from "../../utils/functions";
-import ColorBadge from "../ColorBadge";
 import PaletteColor from "./PaletteColor";
 import AddIcon from "@mui/icons-material/Add";
 

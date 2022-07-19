@@ -1,4 +1,4 @@
-import { Stack, Box, Typography, IconButton, Tooltip } from "@mui/material";
+import { Box, Typography, IconButton, Tooltip } from "@mui/material";
 import {
   selectColor,
   useReallySmallScreen,

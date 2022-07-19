@@ -1,6 +1,5 @@
 import { Box } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import { ColorResult } from "react-color";
 import { Colord, colord } from "colord";
 
 export default function PaletteColor({

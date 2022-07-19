@@ -1,6 +1,5 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { Colord, colord } from "colord";
-import { ColorResult } from "react-color";
 import { useReallySmallScreen } from "../utils/functions";
 import ColorBadge from "./ColorBadge";
 

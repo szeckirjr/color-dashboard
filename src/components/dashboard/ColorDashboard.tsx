@@ -1,9 +1,6 @@
-import { Box, Stack, Typography, useMediaQuery } from "@mui/material";
-import { colord, Colord } from "colord";
-import { ColorResult } from "react-color";
-import { initialObj } from "../../containers";
+import { Stack, Typography } from "@mui/material";
+import { Colord } from "colord";
 import { useSmallScreen } from "../../utils/functions";
-import ColorBadge from "../ColorBadge";
 import HueColors from "../HueColors";
 import LighterDarkerColors from "../LighterDarkerColors";
 import { MainColorFields } from "../MainColorFields";

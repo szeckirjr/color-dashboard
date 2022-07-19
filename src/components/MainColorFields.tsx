@@ -1,14 +1,5 @@
-import { Tag } from "@mui/icons-material";
-import {
-  Button,
-  Input,
-  InputAdornment,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { Colord, colord } from "colord";
-import { useEffect, useState } from "react";
+import { Stack } from "@mui/material";
+import { Colord } from "colord";
 import { useReallySmallScreen } from "../utils/functions";
 import { HexSelector } from "./HexSelector";
 import { RGBSelector } from "./RGBSelector";

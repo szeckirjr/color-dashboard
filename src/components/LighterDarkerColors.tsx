@@ -1,7 +1,6 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { Colord, colord } from "colord";
-import { ColorResult } from "react-color";
-import { useReallySmallScreen, useSmallScreen } from "../utils/functions";
+import { useReallySmallScreen } from "../utils/functions";
 import ColorBadge from "./ColorBadge";
 
 export default function LighterDarkerColors({
