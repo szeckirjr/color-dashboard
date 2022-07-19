@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/color-dashboard/static/css/main.68288f02.css",
+    "main.js": "/color-dashboard/static/js/main.607ffdce.js",
+    "static/js/787.7c4049d2.chunk.js": "/color-dashboard/static/js/787.7c4049d2.chunk.js",
+    "index.html": "/color-dashboard/index.html",
+    "main.68288f02.css.map": "/color-dashboard/static/css/main.68288f02.css.map",
+    "main.607ffdce.js.map": "/color-dashboard/static/js/main.607ffdce.js.map",
+    "787.7c4049d2.chunk.js.map": "/color-dashboard/static/js/787.7c4049d2.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.68288f02.css",
+    "static/js/main.607ffdce.js"
+  ]
+}
