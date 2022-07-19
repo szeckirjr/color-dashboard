@@ -8,6 +8,7 @@ import HueColors from "../HueColors";
 import LighterDarkerColors from "../LighterDarkerColors";
 import { MainColorFields } from "../MainColorFields";
 import MainColorPicker from "../MainColorPicker";
+import { PaletteGenerator } from "../pallete/PaletteGenerator";
 
 export default function ColorDashboard({
   selectedColor,
@@ -28,49 +29,34 @@ export default function ColorDashboard({
       spacing={2}
       display="flex"
     >
-      <Stack flexGrow={1}>
-        <Stack spacing={2} flexGrow={2}>
-          <Typography variant={isSmallScreen ? "h5" : "h4"} fontWeight="500">
-            Enter or pick a color
-          </Typography>
-          <MainColorFields
+      <Stack spacing={2} flexGrow={2}>
+        <Typography variant={isSmallScreen ? "h5" : "h4"} fontWeight="500">
+          Enter or pick a color
+        </Typography>
+        <MainColorFields
+          selectedColor={selectedColor}
+          setSelectedColor={setSelectedColor}
+        />
+        <Stack direction={"column"} gap={5}>
+          <MainColorPicker
             selectedColor={selectedColor}
             setSelectedColor={setSelectedColor}
           />
-          <Stack direction={"column"} gap={5}>
-            <MainColorPicker
-              selectedColor={selectedColor}
-              setSelectedColor={setSelectedColor}
-            />
-            <Box
-              sx={{
-                display: "flex",
-                flexWrap: "wrap",
-                alignContent: "flex-start",
-                flexGrow: 1,
-              }}
-            >
-              {initialObj.map((color, idx) => (
-                <ColorBadge
-                  key={idx}
-                  onClick={setSelectedColor}
-                  color={colord(color.hex)}
-                  selectedColor={selectedColor.toHex()}
-                />
-              ))}
-            </Box>
-          </Stack>
+          <PaletteGenerator
+            selectedColor={selectedColor.toHex()}
+            onClick={setSelectedColor}
+          />
         </Stack>
       </Stack>
       <Stack
-        direction={isSmallScreen ? "column" : "row"}
+        direction="row"
         sx={{
           width: "100%",
           display: "flex",
           alignItems: "stretch",
           height: "70vh",
         }}
-        gap={2}
+        gap={isSmallScreen ? 1 : 2}
       >
         <LighterDarkerColors
           color={selectedColor}

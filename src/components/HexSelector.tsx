@@ -49,7 +49,7 @@ export function HexSelector({
           !colord("#" + enteredHex).isValid() ? "Invalid Hex code" : ""
         }
       />
-      <ButtonGroup sx={{ backgroundColor: "green" }}>
+      <ButtonGroup>
         <Button
           variant="contained"
           sx={{
@@ -67,7 +67,7 @@ export function HexSelector({
           Select HEX
         </Button>
         <CopyButton
-          text={selectedColor.toHex()}
+          text={selectedColor.toHex().replace("#", "")}
           backgroundColor={`#${enteredHex}`}
         />
       </ButtonGroup>

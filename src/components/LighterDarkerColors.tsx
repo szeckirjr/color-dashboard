@@ -1,6 +1,7 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { Colord, colord } from "colord";
 import { ColorResult } from "react-color";
+import { useReallySmallScreen, useSmallScreen } from "../utils/functions";
 import ColorBadge from "./ColorBadge";
 
 export default function LighterDarkerColors({
@@ -12,6 +13,8 @@ export default function LighterDarkerColors({
   setColor: (color: Colord) => void;
   selectedColor: Colord;
 }) {
+  const isReallySmallScreen = useReallySmallScreen();
+
   const colors = [
     90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10,
   ].map((val) => {
@@ -20,19 +23,19 @@ export default function LighterDarkerColors({
 
   return (
     <Stack width="100%">
-      <Typography variant="h4" fontWeight="500">
+      <Typography variant={isReallySmallScreen ? "h5" : "h4"} fontWeight="500">
         Lighter/Darker
       </Typography>
       <Box
         sx={{
           display: "flex",
           flexWrap: "wrap",
+          flexDirection: "column",
           flexGrow: 1,
         }}
       >
         {colors.map((color, idx) => (
           <ColorBadge
-            badgeType="strip"
             key={idx}
             color={color}
             onClick={() => setColor(color)}

@@ -21,7 +21,7 @@ export default function MainColorPicker({
     >
       <RgbaColorPicker
         style={{
-          width: isSmallScreen ? "90vw" : "45vw",
+          width: isSmallScreen ? "95vw" : "45vw",
         }}
         color={selectedColor.toRgb()}
         onChange={(newColor) => setSelectedColor(colord(newColor))}

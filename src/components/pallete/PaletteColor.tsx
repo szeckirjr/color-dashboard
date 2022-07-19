@@ -3,7 +3,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { ColorResult } from "react-color";
 import { Colord, colord } from "colord";
 
-export default function ColorBadge({
+export default function PaletteColor({
   color,
   onClick,
   selectedColor,
@@ -15,17 +15,17 @@ export default function ColorBadge({
   return (
     <Box
       sx={{
-        width: "100%",
+        mr: "10px",
+        mb: "10px",
         bgcolor: color.toHex(),
         cursor: "pointer",
+        height: "80px",
+        width: "80px",
         "&:hover": {
-          flexGrow: 2,
           borderLeft: "1px solid #fff",
           borderRight: "1px solid #fff",
         },
-        transition: "flex-grow 0.08s ease-in-out",
         display: "flex",
-        flexGrow: 1,
         justifyContent: "center",
         alignItems: "center",
       }}

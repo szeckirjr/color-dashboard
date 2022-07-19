@@ -1,6 +1,7 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { Colord, colord } from "colord";
 import { ColorResult } from "react-color";
+import { useReallySmallScreen } from "../utils/functions";
 import ColorBadge from "./ColorBadge";
 
 export default function HueColors({
@@ -12,6 +13,7 @@ export default function HueColors({
   setColor: (color: Colord) => void;
   selectedColor: Colord;
 }) {
+  const isReallySmallScreen = useReallySmallScreen();
   const colors = [
     0, 15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, 195, 210, 225, 240,
     255, 270, 285, 300, 315, 330, 345,
@@ -25,19 +27,18 @@ export default function HueColors({
   // console.log(colors);
   return (
     <Stack width="100%">
-      <Typography variant="h4" fontWeight="500">
+      <Typography variant={isReallySmallScreen ? "h5" : "h4"} fontWeight="500">
         Hue
       </Typography>
       <Box
         sx={{
           display: "flex",
-          flexWrap: "wrap",
+          flexDirection: "column",
           flexGrow: 1,
         }}
       >
         {colors.map((color, idx) => (
           <ColorBadge
-            badgeType="strip"
             key={idx}
             color={color}
             onClick={() => setColor(color)}

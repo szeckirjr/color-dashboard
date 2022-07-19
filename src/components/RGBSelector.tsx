@@ -1,8 +1,15 @@
 import { Tag } from "@mui/icons-material";
-import { Button, InputAdornment, Stack, TextField } from "@mui/material";
+import {
+  Button,
+  ButtonGroup,
+  InputAdornment,
+  Stack,
+  TextField,
+} from "@mui/material";
 import { Colord, colord } from "colord";
 import { useEffect, useState } from "react";
 import { useReallySmallScreen, useSmallScreen } from "../utils/functions";
+import { CopyButton } from "./CopyButton";
 
 export function RGBSelector({
   selectedColor,
@@ -36,12 +43,14 @@ export function RGBSelector({
       <Stack
         direction={isReallySmallScreen ? "column" : "row"}
         gap={isSmallScreen ? 0 : 1}
+        sx={{ width: "100%" }}
       >
         <TextField
           value={enteredRed}
           onChange={(e) => setEnteredRed(e.target.value as unknown as number)}
           sx={{
             fontSize: "1.5em",
+            flexGrow: 1,
           }}
           type="number"
           inputProps={{
@@ -72,6 +81,7 @@ export function RGBSelector({
           onChange={(e) => setEnteredGreen(e.target.value as unknown as number)}
           sx={{
             fontSize: "1.5em",
+            flexGrow: 1,
           }}
           label="G"
           error={
@@ -97,6 +107,7 @@ export function RGBSelector({
           onChange={(e) => setEnteredBlue(e.target.value as unknown as number)}
           sx={{
             fontSize: "1.5em",
+            flexGrowing: 1,
           }}
           label="B"
           error={
@@ -123,6 +134,7 @@ export function RGBSelector({
           onChange={(e) => setEnteredAlpha(e.target.value as unknown as number)}
           sx={{
             fontSize: "1.5em",
+            flexGrow: 1,
           }}
           label="A"
           error={
@@ -139,29 +151,36 @@ export function RGBSelector({
           }
         />
       </Stack>
-      <Button
-        variant="contained"
-        sx={{
-          backgroundColor: colord(
-            `rgba(${enteredRed}, ${enteredGreen}, ${enteredBlue}, ${enteredAlpha})`
-          ).toHex(),
-          color: colord(
-            `rgba(${enteredRed}, ${enteredGreen}, ${enteredBlue}, ${enteredAlpha})`
-          ).isLight()
-            ? "black"
-            : "white",
-          "&:hover": {
+      <ButtonGroup>
+        <Button
+          variant="contained"
+          sx={{
             backgroundColor: colord(
               `rgba(${enteredRed}, ${enteredGreen}, ${enteredBlue}, ${enteredAlpha})`
-            )
-              .darken()
-              .toHex(),
-          },
-        }}
-        onClick={handleSelect}
-      >
-        Select RGB
-      </Button>
+            ).toHex(),
+            color: colord(
+              `rgba(${enteredRed}, ${enteredGreen}, ${enteredBlue}, ${enteredAlpha})`
+            ).isLight()
+              ? "black"
+              : "white",
+            "&:hover": {
+              backgroundColor: colord(
+                `rgba(${enteredRed}, ${enteredGreen}, ${enteredBlue}, ${enteredAlpha})`
+              )
+                .darken()
+                .toHex(),
+            },
+            width: "100%",
+          }}
+          onClick={handleSelect}
+        >
+          Select RGB
+        </Button>
+        <CopyButton
+          text={selectedColor.toRgbString()}
+          backgroundColor={`rgba(${enteredRed}, ${enteredGreen}, ${enteredBlue}, ${enteredAlpha})`}
+        />
+      </ButtonGroup>
     </Stack>
   );
 }

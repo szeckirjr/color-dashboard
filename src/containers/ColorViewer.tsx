@@ -22,20 +22,20 @@ export default function ColorViewer({
 
   const formattedColor = selectedCol.isLight()
     ? selectedCol.toHex()
-    : "darkgray";
+    : selectedCol.lighten(0.2).toHex();
 
   return (
-    <Stack
-      direction="row"
+    <Box
       sx={{
         display: "flex",
-        justifyContent: "space-between",
         alignItems: "center",
+        mt: 1,
+        mb: 2,
       }}
     >
       <Tooltip
         arrow
-        title="Click to copy"
+        title={<Typography>Click to copy!</Typography>}
         placement={isSmallScreen ? "bottom" : "top"}
         disableInteractive
       >
@@ -44,17 +44,18 @@ export default function ColorViewer({
             borderRadius: "15px",
             "&:hover": {
               cursor: "pointer",
-              boxShadow: "0 0 50px 1px " + formattedColor,
+              boxShadow: "0 0 20px 0.01px " + formattedColor,
             },
-            transition: "all 0.4s ease-in-out",
+            transition: "all 0.2s ease-in-out",
+            // boxShadow: "0 0 20px 0.01px " + formattedColor,
+            height: "100%",
           }}
           //height="45px"
           bgcolor={selectedCol.toHex()}
-          mb={4}
+          py={2}
           onClick={() => selectColor(selectedCol, setOpen)}
           display="flex"
           justifyContent="space-evenly"
-          py={2}
           flexGrow={1}
         >
           <Typography
@@ -84,6 +85,6 @@ export default function ColorViewer({
       <IconButton size="large" onClick={() => setShowText(!showText)}>
         <AbcIcon fontSize="large" />
       </IconButton>
-    </Stack>
+    </Box>
   );
 }
