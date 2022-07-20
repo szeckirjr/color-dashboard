@@ -1,6 +1,6 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { Colord, colord } from "colord";
-import { useReallySmallScreen } from "../utils/functions";
+import { useReallySmallScreen, useSmallScreen } from "../utils/functions";
 import ColorBadge from "./ColorBadge";
 
 export default function LighterDarkerColors({
@@ -12,6 +12,7 @@ export default function LighterDarkerColors({
   setColor: (color: Colord) => void;
   selectedColor: Colord;
 }) {
+  const isSmallScreen = useSmallScreen();
   const isReallySmallScreen = useReallySmallScreen();
 
   const colors = [
@@ -22,8 +23,14 @@ export default function LighterDarkerColors({
 
   return (
     <Stack width="100%">
-      <Typography variant={isReallySmallScreen ? "h5" : "h4"} fontWeight="500">
-        Lighter/Darker
+      <Typography
+        sx={{
+          wordWrap: "break-word",
+        }}
+        variant={isSmallScreen ? "h5" : "h4"}
+        fontWeight="500"
+      >
+        Lighter to Darker
       </Typography>
       <Box
         sx={{

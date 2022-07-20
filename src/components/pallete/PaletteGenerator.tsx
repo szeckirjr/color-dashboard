@@ -19,11 +19,8 @@ export function PaletteGenerator({
   return (
     <Stack
       sx={{
-        position: isSmallScreen ? "fixed" : "initial",
-        bottom: isSmallScreen ? "0" : "initial",
         width: "100%",
-        backgroundColor: "#262626",
-        zIndex: 3,
+        flexShrink: 1,
       }}
     >
       <Typography
@@ -37,8 +34,13 @@ export function PaletteGenerator({
         sx={{
           display: "flex",
           flexWrap: "wrap",
-          alignItems: "center",
-          flexGrow: 1,
+          justifyContent: isSmallScreen ? "center" : "flex-start",
+          alignItems: isSmallScreen ? "flex-start" : "flex-start",
+          overflow: "scroll",
+          position: "relative",
+          padding: 1,
+          maxWidth: "600px",
+          maxHeight: isReallySmallScreen ? "60vh" : "initial",
         }}
       >
         {colors.map((color, idx) => {
@@ -59,13 +61,13 @@ export function PaletteGenerator({
           disableInteractive
         >
           <IconButton
-            disabled={isReallySmallScreen && colors.length >= 4}
+            // disabled={colors.includes(selectedColor)}
+            sx={{}}
             size="large"
             aria-label="close"
             color="inherit"
             onClick={() => {
-              (!isReallySmallScreen || colors.length < 4) &&
-                setColors([...colors, selectedColor]);
+              setColors([...colors, selectedColor]);
             }}
             // onClick={handleClose}
           >

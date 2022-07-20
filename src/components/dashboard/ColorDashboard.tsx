@@ -26,9 +26,6 @@ export default function ColorDashboard({
       direction={isSmallScreen ? "column" : "row"}
       spacing={2}
       display="flex"
-      sx={{
-        backgroundColor: "#262626",
-      }}
     >
       <Stack
         direction="row"
@@ -36,7 +33,8 @@ export default function ColorDashboard({
           width: "100%",
           display: "flex",
           alignItems: "stretch",
-          height: isSmallScreen ? "60vh" : "70vh",
+          minHeight: isSmallScreen ? "60vh" : "70vh",
+          transition: "height 2s ease-in-out",
         }}
         gap={isSmallScreen ? 1 : 2}
       >
@@ -50,25 +48,34 @@ export default function ColorDashboard({
           setColor={setSelectedColor}
           selectedColor={selectedColor}
         />
+        {isSmallScreen && (
+          <PaletteGenerator
+            selectedColor={selectedColor.toHex()}
+            onClick={setSelectedColor}
+          />
+        )}
       </Stack>
       <Stack spacing={2} flexGrow={3}>
         <Typography variant={isSmallScreen ? "h5" : "h4"} fontWeight="500">
           Enter or pick a color
         </Typography>
-        <MainColorFields
-          selectedColor={selectedColor}
-          setSelectedColor={setSelectedColor}
-        />
-        <Stack direction={"column"} gap={5} pb={isReallySmallScreen ? 10 : 0}>
+
+        <Stack direction={"column"} gap={5}>
           <MainColorPicker
             selectedColor={selectedColor}
             setSelectedColor={setSelectedColor}
           />
+        </Stack>
+        <MainColorFields
+          selectedColor={selectedColor}
+          setSelectedColor={setSelectedColor}
+        />
+        {!isSmallScreen && (
           <PaletteGenerator
             selectedColor={selectedColor.toHex()}
             onClick={setSelectedColor}
           />
-        </Stack>
+        )}
       </Stack>
     </Stack>
   );

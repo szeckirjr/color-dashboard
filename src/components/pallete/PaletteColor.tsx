@@ -23,7 +23,7 @@ export default function PaletteColor({
         width: "60px",
         scale: "1",
         "&:hover": {
-          scale: "1.1",
+          scale: "1.15",
         },
         transition: "scale 0.2s ease-in-out",
         display: "flex",

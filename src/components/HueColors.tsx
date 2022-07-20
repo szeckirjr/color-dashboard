@@ -1,6 +1,6 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { Colord, colord } from "colord";
-import { useReallySmallScreen } from "../utils/functions";
+import { useReallySmallScreen, useSmallScreen } from "../utils/functions";
 import ColorBadge from "./ColorBadge";
 
 export default function HueColors({
@@ -13,6 +13,7 @@ export default function HueColors({
   selectedColor: Colord;
 }) {
   const isReallySmallScreen = useReallySmallScreen();
+  const isSmallScreen = useSmallScreen();
   const colors = [
     0, 15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, 195, 210, 225, 240,
     255, 270, 285, 300, 315, 330, 345,
@@ -26,7 +27,7 @@ export default function HueColors({
   // console.log(colors);
   return (
     <Stack width="100%">
-      <Typography variant={isReallySmallScreen ? "h5" : "h4"} fontWeight="500">
+      <Typography variant={isSmallScreen ? "h5" : "h4"} fontWeight="500">
         Hue
       </Typography>
       <Box

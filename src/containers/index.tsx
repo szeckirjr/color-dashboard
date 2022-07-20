@@ -1,5 +1,5 @@
 import { Box, IconButton, Snackbar, useTheme } from "@mui/material";
-import { useContext, useState, Fragment } from "react";
+import { useContext, useState, Fragment, useEffect } from "react";
 import { ColorModeContext } from "../App";
 import ColorDashboard from "../components/dashboard/ColorDashboard";
 import CloseIcon from "@mui/icons-material/Close";
@@ -10,6 +10,7 @@ import { ColorResult } from "react-color";
 import { colord, Colord } from "colord";
 import { useReallySmallScreen } from "../utils/functions";
 import { bgcolor } from "@mui/system";
+import { ModeCommentOutlined } from "@mui/icons-material";
 
 export const initial = [
   "#F8BBD0",
@@ -233,6 +234,13 @@ export default function Dashboard() {
   const theme = useTheme();
   const { mode } = theme.palette;
 
+  useEffect(() => {
+    document.body.setAttribute(
+      "style",
+      mode === "light" ? "background: #f2f2f2;" : "background: #262626;"
+    );
+  }, [mode]);
+
   const [selectedCol, setSelectedCol] = useState<Colord>(selectRandomColor());
   const [open, setOpen] = useState(false);
   const isReallySmallScreen = useReallySmallScreen();
@@ -268,7 +276,6 @@ export default function Dashboard() {
       sx={{
         overflowX: "hidden",
         color: "text.primary",
-        bgcolor: mode === "light" ? "#f2f2f2" : "#262626",
         transition: "all 0.4s ease-in-out",
         height: "100%",
         pb: 4,
