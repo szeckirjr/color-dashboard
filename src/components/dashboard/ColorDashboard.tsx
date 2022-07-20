@@ -1,6 +1,6 @@
 import { Stack, Typography } from "@mui/material";
 import { Colord } from "colord";
-import { useReallySmallScreen, useSmallScreen } from "../../utils/functions";
+import { useSmallScreen } from "../../utils/functions";
 import HueColors from "../HueColors";
 import LighterDarkerColors from "../LighterDarkerColors";
 import { MainColorFields } from "../MainColorFields";
@@ -19,7 +19,6 @@ export default function ColorDashboard({
   //   const theme = useTheme();
   //   const { mode } = theme.palette;
   const isSmallScreen = useSmallScreen();
-  const isReallySmallScreen = useReallySmallScreen();
 
   return (
     <Stack

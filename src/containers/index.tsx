@@ -6,11 +6,8 @@ import CloseIcon from "@mui/icons-material/Close";
 
 import Header from "./Header";
 import ColorViewer from "./ColorViewer";
-import { ColorResult } from "react-color";
 import { colord, Colord } from "colord";
 import { useReallySmallScreen } from "../utils/functions";
-import { bgcolor } from "@mui/system";
-import { ModeCommentOutlined } from "@mui/icons-material";
 
 export const initial = [
   "#F8BBD0",

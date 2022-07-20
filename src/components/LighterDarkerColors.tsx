@@ -1,6 +1,6 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { Colord, colord } from "colord";
-import { useReallySmallScreen, useSmallScreen } from "../utils/functions";
+import { useSmallScreen } from "../utils/functions";
 import ColorBadge from "./ColorBadge";
 
 export default function LighterDarkerColors({
@@ -13,7 +13,6 @@ export default function LighterDarkerColors({
   selectedColor: Colord;
 }) {
   const isSmallScreen = useSmallScreen();
-  const isReallySmallScreen = useReallySmallScreen();
 
   const colors = [
     90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10,
