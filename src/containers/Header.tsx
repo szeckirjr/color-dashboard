@@ -1,8 +1,9 @@
 import { Box, IconButton, Stack, Typography } from "@mui/material";
 import Brightness2Icon from "@mui/icons-material/Brightness2";
 import LightModeIcon from "@mui/icons-material/LightMode";
-import { colord } from "colord";
+import { Colord, colord } from "colord";
 import { useReallySmallScreen } from "../utils/functions";
+import { selectRandomColor } from ".";
 
 const Logo = ({ mode }: { mode: "light" | "dark" }) => {
   const isReallySmallScreen = useReallySmallScreen();
@@ -35,9 +36,11 @@ const Logo = ({ mode }: { mode: "light" | "dark" }) => {
 export default function Header({
   mode,
   toggleClick,
+  setSelectedColor,
 }: {
   mode: "light" | "dark";
   toggleClick: () => void;
+  setSelectedColor: (color: Colord) => void;
 }) {
   const isReallySmallScreen = useReallySmallScreen();
 
@@ -53,16 +56,17 @@ export default function Header({
       }}
     >
       <Stack
-        direction={isReallySmallScreen ? "column" : "row"}
+        direction="row"
         sx={{
           display: "flex",
           alignItems: "baseline",
         }}
-        spacing={isReallySmallScreen ? -2 : 1}
+        spacing={0.5}
       >
         <Typography
           variant={isReallySmallScreen ? "h3" : "h2"}
           fontWeight="bold"
+          onClick={() => setSelectedColor(selectRandomColor())}
         >
           Colors
         </Typography>
