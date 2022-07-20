@@ -1,7 +1,7 @@
 import { Box, IconButton, Stack, Tooltip, Typography } from "@mui/material";
 import { Colord, colord } from "colord";
 import { useState } from "react";
-import { useReallySmallScreen } from "../../utils/functions";
+import { useReallySmallScreen, useSmallScreen } from "../../utils/functions";
 import PaletteColor from "./PaletteColor";
 import AddIcon from "@mui/icons-material/Add";
 
@@ -12,12 +12,22 @@ export function PaletteGenerator({
   selectedColor: string;
   onClick: (val: Colord) => void;
 }): JSX.Element {
+  const isSmallScreen = useSmallScreen();
   const isReallySmallScreen = useReallySmallScreen();
   const [colors, setColors] = useState<string[]>([]);
+
   return (
-    <Stack>
+    <Stack
+      sx={{
+        position: isSmallScreen ? "fixed" : "initial",
+        bottom: isSmallScreen ? "0" : "initial",
+        width: "100%",
+        backgroundColor: "#262626",
+        zIndex: 3,
+      }}
+    >
       <Typography
-        pb={1}
+        p={1}
         fontWeight={500}
         variant={isReallySmallScreen ? "h5" : "h4"}
       >
@@ -49,11 +59,13 @@ export function PaletteGenerator({
           disableInteractive
         >
           <IconButton
+            disabled={isReallySmallScreen && colors.length >= 4}
             size="large"
             aria-label="close"
             color="inherit"
             onClick={() => {
-              setColors([...colors, selectedColor]);
+              (!isReallySmallScreen || colors.length < 4) &&
+                setColors([...colors, selectedColor]);
             }}
             // onClick={handleClose}
           >

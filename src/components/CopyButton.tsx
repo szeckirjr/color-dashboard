@@ -15,9 +15,8 @@ export function CopyButton({
 }): JSX.Element {
   const [open, setOpen] = useState(false);
 
-  const handleClick = () => {
-    navigator.clipboard.writeText(text);
-    setOpen(true);
+  const handleClick = async () => {
+    navigator.clipboard.writeText(text).then(() => setOpen(true));
   };
 
   const handleClose = (
@@ -47,6 +46,7 @@ export function CopyButton({
   return (
     <>
       <Button
+        id="copy-button"
         variant="contained"
         color="primary"
         size="small"

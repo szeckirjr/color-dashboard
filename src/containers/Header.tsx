@@ -48,6 +48,8 @@ export default function Header({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
+        py: 1,
+        px: isReallySmallScreen ? 1 : 3,
       }}
     >
       <Stack
@@ -67,18 +69,11 @@ export default function Header({
         <Logo mode={mode} />
       </Stack>
       <Box>
-        <IconButton
-          size={isReallySmallScreen ? "small" : "large"}
-          onClick={() => toggleClick()}
-        >
+        <IconButton size="large" onClick={() => toggleClick()}>
           {mode === "light" ? (
-            <Brightness2Icon
-              fontSize={isReallySmallScreen ? "medium" : "large"}
-            />
+            <Brightness2Icon fontSize="large" />
           ) : (
-            <LightModeIcon
-              fontSize={isReallySmallScreen ? "medium" : "large"}
-            />
+            <LightModeIcon fontSize="large" />
           )}
         </IconButton>
       </Box>

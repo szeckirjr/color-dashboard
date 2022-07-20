@@ -1,7 +1,6 @@
-import { Box, Typography, useMediaQuery } from "@mui/material";
+import { Box } from "@mui/material";
 import { Colord, colord } from "colord";
-import { HexColorPicker, RgbaColorPicker } from "react-colorful";
-import { ColorResult } from "../App";
+import { RgbaColorPicker } from "react-colorful";
 import { useSmallScreen } from "../utils/functions";
 
 export default function MainColorPicker({

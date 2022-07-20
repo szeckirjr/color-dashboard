@@ -1,4 +1,4 @@
-import { Box, Typography, IconButton, Tooltip } from "@mui/material";
+import { Box, Typography, IconButton, Tooltip, useTheme } from "@mui/material";
 import {
   selectColor,
   useReallySmallScreen,
@@ -19,6 +19,8 @@ export default function ColorViewer({
 
   const isReallySmallScreen = useReallySmallScreen();
   const isSmallScreen = useSmallScreen();
+  const theme = useTheme();
+  const { mode } = theme.palette;
 
   const formattedColor = selectedCol.isLight()
     ? selectedCol.toHex()
@@ -26,11 +28,17 @@ export default function ColorViewer({
 
   return (
     <Box
+      position="sticky"
       sx={{
+        top: 0,
+        zIndex: 4,
         display: "flex",
         alignItems: "center",
-        mt: 1,
-        mb: 2,
+        py: 2,
+        px: 1,
+        boxShadow:
+          "6px 6px 20px 0.01px " + (mode === "light" ? "lightgray" : "#080808"),
+        transition: "box-shadow 0.4s ease-in-out",
       }}
     >
       <Tooltip

@@ -9,6 +9,7 @@ import ColorViewer from "./ColorViewer";
 import { ColorResult } from "react-color";
 import { colord, Colord } from "colord";
 import { useReallySmallScreen } from "../utils/functions";
+import { bgcolor } from "@mui/system";
 
 export const initial = [
   "#F8BBD0",
@@ -368,26 +369,34 @@ export default function Dashboard() {
   return (
     <Box
       sx={{
-        bgcolor: mode === "light" ? "#f2f2f2" : "#262626",
+        overflowX: "hidden",
         color: "text.primary",
-        p: isReallySmallScreen ? 1 : 3,
+        bgcolor: mode === "light" ? "#f2f2f2" : "#262626",
         transition: "all 0.4s ease-in-out",
+        height: "100%",
+        pb: 4,
       }}
     >
       <Header mode={mode} toggleClick={colorMode.toggleColorMode} />
       <ColorViewer selectedCol={selectedCol} setOpen={setOpen} />
-      <ColorDashboard
-        selectedColor={selectedCol}
-        setSelectedColor={setSelectedCol}
-        setOpen={setOpen}
-      />
-      <Snackbar
-        open={open}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        message="HEX code copied to clipboard!"
-        action={action}
-      />
+      <Box
+        sx={{
+          p: isReallySmallScreen ? 1 : 3,
+        }}
+      >
+        <ColorDashboard
+          selectedColor={selectedCol}
+          setSelectedColor={setSelectedCol}
+          setOpen={setOpen}
+        />
+        <Snackbar
+          open={open}
+          autoHideDuration={6000}
+          onClose={handleClose}
+          message="HEX code copied to clipboard!"
+          action={action}
+        />
+      </Box>
     </Box>
   );
 }
