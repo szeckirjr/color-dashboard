@@ -52,8 +52,9 @@ export default function ColorViewer({
             borderRadius: "15px",
             "&:hover": {
               cursor: "pointer",
-              boxShadow: "0 0 20px 0.01px " + formattedColor,
+              boxShadow: "0 0 35px 0.01px " + formattedColor,
             },
+            boxShadow: "0 0 20px 0.01px " + formattedColor,
             transition: "all 0.2s ease-in-out",
             // boxShadow: "0 0 20px 0.01px " + formattedColor,
             height: "100%",
