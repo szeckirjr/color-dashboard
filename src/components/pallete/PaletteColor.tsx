@@ -1,15 +1,20 @@
-import { Box } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Colord, colord } from "colord";
+import { DeleteForever } from "@mui/icons-material";
 
 export default function PaletteColor({
   color,
   onClick,
   selectedColor,
+  edit,
+  removeColor,
 }: {
   color: Colord;
   onClick: (val: Colord) => void;
   selectedColor: string;
+  edit: boolean;
+  removeColor: (hex: string) => void;
 }) {
   return (
     <Box
@@ -29,15 +34,21 @@ export default function PaletteColor({
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        position: "relative",
       }}
-      onClick={() => onClick(color)}
+      onClick={() => !edit && onClick(color)}
     >
-      {color.toHex() === selectedColor && (
+      {!edit && color.toHex() === selectedColor && (
         <CheckCircleIcon
           sx={{
             color: colord(color.toHex()).isLight() ? "black" : "white",
           }}
         />
+      )}
+      {edit && (
+        <IconButton>
+          <DeleteForever onClick={() => removeColor(color.toHex())} />
+        </IconButton>
       )}
     </Box>
   );

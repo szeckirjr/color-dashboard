@@ -1,9 +1,10 @@
 import { Box, IconButton, Stack, Tooltip, Typography } from "@mui/material";
 import { Colord, colord } from "colord";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useReallySmallScreen, useSmallScreen } from "../../utils/functions";
 import PaletteColor from "./PaletteColor";
 import AddIcon from "@mui/icons-material/Add";
+import { Edit, EditOff } from "@mui/icons-material";
 
 export function PaletteGenerator({
   selectedColor,
@@ -14,7 +15,26 @@ export function PaletteGenerator({
 }): JSX.Element {
   const isSmallScreen = useSmallScreen();
   const isReallySmallScreen = useReallySmallScreen();
-  const [colors, setColors] = useState<string[]>([]);
+  const [colors, setColors] = useState<string[]>(
+    JSON.parse(window.localStorage.getItem("wardo-color-palette") ?? "[]")
+  );
+  const [editMode, setEditMode] = useState(false);
+
+  useEffect(() => {
+    if (colors) {
+      window.localStorage.setItem(
+        "wardo-color-palette",
+        JSON.stringify(colors)
+      );
+    }
+  }, [colors]);
+
+  const removeColor = (hex: string) => {
+    const idx = colors.indexOf(hex);
+    if (idx) {
+      setColors(colors.slice(0, idx).concat(colors.slice(idx + 1)));
+    }
+  };
 
   return (
     <Stack
@@ -23,13 +43,29 @@ export function PaletteGenerator({
         flexShrink: 1,
       }}
     >
-      <Typography
-        p={1}
-        fontWeight={500}
-        variant={isReallySmallScreen ? "h5" : "h4"}
+      <Stack
+        direction="row"
+        width="100%"
+        display="flex"
+        sx={{
+          alignItems: "center",
+        }}
       >
-        Palette
-      </Typography>
+        <Typography
+          p={1}
+          fontWeight={500}
+          variant={isReallySmallScreen ? "h5" : "h4"}
+        >
+          Palette
+        </Typography>
+        <IconButton size="medium" onClick={() => setEditMode(!editMode)}>
+          {editMode ? (
+            <EditOff fontSize="medium" />
+          ) : (
+            <Edit fontSize="medium" />
+          )}
+        </IconButton>
+      </Stack>
       <Box
         sx={{
           display: "flex",
@@ -49,8 +85,13 @@ export function PaletteGenerator({
             <PaletteColor
               key={idx}
               color={colord(color)}
-              onClick={() => onClick(colord(color))}
+              onClick={() => {
+                setEditMode(false);
+                onClick(colord(color));
+              }}
               selectedColor={selectedColor}
+              edit={editMode}
+              removeColor={removeColor}
             />
           );
         })}
@@ -62,12 +103,12 @@ export function PaletteGenerator({
         >
           <IconButton
             // disabled={colors.includes(selectedColor)}
-            sx={{}}
             size="large"
             aria-label="close"
             color="inherit"
             onClick={() => {
-              setColors([...colors, selectedColor]);
+              !colors.includes(selectedColor) &&
+                setColors([...colors, selectedColor]);
             }}
             // onClick={handleClose}
           >
