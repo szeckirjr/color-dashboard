@@ -7,9 +7,11 @@ import { RGBSelector } from "./RGBSelector";
 export function MainColorFields({
   selectedColor,
   setSelectedColor,
+  setOpen,
 }: {
   selectedColor: Colord;
   setSelectedColor: (color: Colord) => void;
+  setOpen: (val: boolean) => void;
 }) {
   const isReallySmallScreen = useReallySmallScreen();
   return (
@@ -22,10 +24,12 @@ export function MainColorFields({
       <HexSelector
         setSelectedColor={setSelectedColor}
         selectedColor={selectedColor}
+        setOpen={setOpen}
       />
       <RGBSelector
         setSelectedColor={setSelectedColor}
         selectedColor={selectedColor}
+        setOpen={setOpen}
       />
     </Stack>
   );

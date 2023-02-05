@@ -1,9 +1,15 @@
 import { useMediaQuery } from "@mui/material";
 import { Colord } from "colord";
 
-export function selectColor(color: Colord, setOpen: (val: boolean) => void) {
-  navigator.clipboard.writeText(color.toHex());
-  setOpen(true);
+export function copyColorToClipboard(
+  color: Colord,
+  type: "hex" | "rgba",
+  setTooltipOpen: (val: boolean) => void
+) {
+  navigator.clipboard.writeText(
+    type === "hex" ? color.toHex().replaceAll("#", "") : color.toRgbString()
+  );
+  setTooltipOpen(true);
 }
 
 export const useSmallScreen = (): boolean => {

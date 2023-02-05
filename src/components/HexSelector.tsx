@@ -13,9 +13,11 @@ import { CopyButton } from "./CopyButton";
 export function HexSelector({
   selectedColor,
   setSelectedColor,
+  setOpen,
 }: {
   selectedColor: Colord;
   setSelectedColor: (col: Colord) => void;
+  setOpen: (val: boolean) => void;
 }) {
   useEffect(() => {
     setEnteredHex(selectedColor.toHex().replace("#", ""));
@@ -33,11 +35,12 @@ export function HexSelector({
       <TextField
         value={enteredHex}
         onChange={(e) => setEnteredHex(e.target.value)}
-        sx={{
-          fontSize: "1.5em",
-        }}
+        size="small"
         label="HEX"
         InputProps={{
+          sx: {
+            fontSize: "1.25em",
+          },
           startAdornment: (
             <InputAdornment position="start">
               <Tag />
@@ -48,6 +51,7 @@ export function HexSelector({
         helperText={
           !colord("#" + enteredHex).isValid() ? "Invalid Hex code" : ""
         }
+        variant="standard"
       />
       <ButtonGroup>
         <Button
@@ -67,8 +71,10 @@ export function HexSelector({
           Select HEX
         </Button>
         <CopyButton
-          text={selectedColor.toHex().replace("#", "")}
+          color={selectedColor}
           backgroundColor={`#${enteredHex}`}
+          setOpen={setOpen}
+          colorMode="hex"
         />
       </ButtonGroup>
     </Stack>

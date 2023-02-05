@@ -6,10 +6,6 @@ export const ColorModeContext = React.createContext({
   toggleColorMode: () => {},
 });
 
-function MyApp() {
-  return <Dashboard />;
-}
-
 export default function ToggleColorMode() {
   const [mode, setMode] = React.useState<"light" | "dark">("dark");
   const colorMode = React.useMemo(
@@ -34,7 +30,7 @@ export default function ToggleColorMode() {
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
-        <MyApp />
+        <Dashboard />
       </ThemeProvider>
     </ColorModeContext.Provider>
   );

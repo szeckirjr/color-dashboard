@@ -21,12 +21,12 @@ export default function LighterDarkerColors({
   });
 
   return (
-    <Stack width="100%">
+    <Stack width="50%">
       <Typography
         sx={{
           wordWrap: "break-word",
         }}
-        variant={isSmallScreen ? "h5" : "h4"}
+        variant={isSmallScreen ? "h6" : "h5"}
         fontWeight="500"
       >
         Lighter to Darker

@@ -240,6 +240,8 @@ export default function Dashboard() {
 
   const [selectedCol, setSelectedCol] = useState<Colord>(selectRandomColor());
   const [open, setOpen] = useState(false);
+  const [showText, setShowText] = useState(false);
+
   const isReallySmallScreen = useReallySmallScreen();
 
   const colorMode = useContext(ColorModeContext);
@@ -273,7 +275,7 @@ export default function Dashboard() {
       sx={{
         overflowX: "hidden",
         color: "text.primary",
-        transition: "all 0.4s ease-in-out",
+        transition: "all 0.25s ease-in-out",
         height: "100%",
         pb: 4,
       }}
@@ -282,8 +284,14 @@ export default function Dashboard() {
         setSelectedColor={setSelectedCol}
         mode={mode}
         toggleClick={colorMode.toggleColorMode}
+        showText={showText}
+        setShowText={setShowText}
       />
-      <ColorViewer selectedCol={selectedCol} setOpen={setOpen} />
+      <ColorViewer
+        selectedCol={selectedCol}
+        setOpen={setOpen}
+        showText={showText}
+      />
       <Box
         sx={{
           p: isReallySmallScreen ? 1 : 3,
@@ -298,7 +306,7 @@ export default function Dashboard() {
           open={open}
           autoHideDuration={6000}
           onClose={handleClose}
-          message="HEX code copied to clipboard!"
+          message="Color copied to clipboard! 📋"
           action={action}
         />
       </Box>

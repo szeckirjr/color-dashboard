@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { Colord, colord } from "colord";
 import { RgbaColorPicker } from "react-colorful";
 import { useSmallScreen } from "../utils/functions";
@@ -11,20 +11,19 @@ export default function MainColorPicker({
   setSelectedColor: (color: Colord) => void;
 }) {
   const isSmallScreen = useSmallScreen();
+
   return (
-    <Box
-      sx={{
-        position: "relative",
-        color: "black",
-      }}
-    >
+    <Stack mb={1}>
+      <Typography variant={isSmallScreen ? "h6" : "h5"} fontWeight="500">
+        Enter or pick a color
+      </Typography>
       <RgbaColorPicker
         style={{
-          width: isSmallScreen ? "95vw" : "45vw",
+          width: "100%",
         }}
         color={selectedColor.toRgb()}
         onChange={(newColor) => setSelectedColor(colord(newColor))}
       />
-    </Box>
+    </Stack>
   );
 }

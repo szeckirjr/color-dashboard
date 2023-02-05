@@ -1,4 +1,4 @@
-import { Stack, Typography } from "@mui/material";
+import { Stack } from "@mui/material";
 import { Colord } from "colord";
 import { useSmallScreen } from "../../utils/functions";
 import HueColors from "../HueColors";
@@ -16,8 +16,6 @@ export default function ColorDashboard({
   setSelectedColor: (color: Colord) => void;
   setOpen: (val: boolean) => void;
 }) {
-  //   const theme = useTheme();
-  //   const { mode } = theme.palette;
   const isSmallScreen = useSmallScreen();
 
   return (
@@ -27,7 +25,7 @@ export default function ColorDashboard({
       display="flex"
     >
       <Stack
-        direction="row"
+        direction={isSmallScreen ? "column" : "row"}
         sx={{
           width: "100%",
           display: "flex",
@@ -37,39 +35,40 @@ export default function ColorDashboard({
         }}
         gap={isSmallScreen ? 1 : 2}
       >
-        <LighterDarkerColors
-          color={selectedColor}
-          setColor={setSelectedColor}
-          selectedColor={selectedColor}
-        />
-        <HueColors
-          color={selectedColor}
-          setColor={setSelectedColor}
-          selectedColor={selectedColor}
-        />
-        {isSmallScreen && (
-          <PaletteGenerator
-            selectedColor={selectedColor.toHex()}
-            onClick={setSelectedColor}
-          />
-        )}
-      </Stack>
-      <Stack spacing={2} flexGrow={3}>
-        <Typography variant={isSmallScreen ? "h5" : "h4"} fontWeight="500">
-          Enter or pick a color
-        </Typography>
-
-        <Stack direction={"column"} gap={5}>
+        <Stack direction={"column"} spacing={1} flexGrow={2}>
           <MainColorPicker
             selectedColor={selectedColor}
             setSelectedColor={setSelectedColor}
           />
+          <MainColorFields
+            selectedColor={selectedColor}
+            setSelectedColor={setSelectedColor}
+            setOpen={setOpen}
+          />
+          {!isSmallScreen && (
+            <PaletteGenerator
+              selectedColor={selectedColor.toHex()}
+              onClick={setSelectedColor}
+            />
+          )}
         </Stack>
-        <MainColorFields
-          selectedColor={selectedColor}
-          setSelectedColor={setSelectedColor}
-        />
-        {!isSmallScreen && (
+        <Stack
+          direction="row"
+          width={isSmallScreen ? "100%" : "50%"}
+          minHeight="40vh"
+        >
+          <LighterDarkerColors
+            color={selectedColor}
+            setColor={setSelectedColor}
+            selectedColor={selectedColor}
+          />
+          <HueColors
+            color={selectedColor}
+            setColor={setSelectedColor}
+            selectedColor={selectedColor}
+          />
+        </Stack>
+        {isSmallScreen && (
           <PaletteGenerator
             selectedColor={selectedColor.toHex()}
             onClick={setSelectedColor}

@@ -47,7 +47,12 @@ export default function PaletteColor({
       )}
       {edit && (
         <IconButton>
-          <DeleteForever onClick={() => removeColor(color.toHex())} />
+          <DeleteForever
+            onClick={() => removeColor(color.toHex())}
+            sx={{
+              color: colord(color.toHex()).isLight() ? "black" : "white",
+            }}
+          />
         </IconButton>
       )}
     </Box>

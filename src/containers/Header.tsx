@@ -1,12 +1,15 @@
-import { Box, IconButton, Stack, Typography } from "@mui/material";
+import { Box, IconButton, Stack, Typography, useTheme } from "@mui/material";
 import Brightness2Icon from "@mui/icons-material/Brightness2";
 import LightModeIcon from "@mui/icons-material/LightMode";
-import { Colord, colord } from "colord";
+import { Colord } from "colord";
 import { useReallySmallScreen } from "../utils/functions";
 import { selectRandomColor } from ".";
+import AbcIcon from "@mui/icons-material/Abc";
 
-const Logo = ({ mode }: { mode: "light" | "dark" }) => {
-  const isReallySmallScreen = useReallySmallScreen();
+const Logo = () => {
+  const theme = useTheme();
+  const { mode } = theme.palette;
+
   return (
     <Typography
       sx={{
@@ -18,7 +21,7 @@ const Logo = ({ mode }: { mode: "light" | "dark" }) => {
         position: "relative",
         left: 5,
       }}
-      variant={isReallySmallScreen ? "h6" : "h5"}
+      variant="h6"
       fontWeight="bold"
     >
       <a
@@ -37,10 +40,14 @@ export default function Header({
   mode,
   toggleClick,
   setSelectedColor,
+  showText,
+  setShowText,
 }: {
   mode: "light" | "dark";
   toggleClick: () => void;
   setSelectedColor: (color: Colord) => void;
+  showText: boolean;
+  setShowText: (val: boolean) => void;
 }) {
   const isReallySmallScreen = useReallySmallScreen();
 
@@ -64,16 +71,28 @@ export default function Header({
         spacing={0.5}
       >
         <Typography
-          variant={isReallySmallScreen ? "h3" : "h2"}
+          variant={isReallySmallScreen ? "h4" : "h3"}
           fontWeight="bold"
           onClick={() => setSelectedColor(selectRandomColor())}
+          sx={{
+            cursor: "pointer",
+          }}
         >
           Colors
         </Typography>
-        <Logo mode={mode} />
+        <Logo />
       </Stack>
       <Box>
-        <IconButton size="large" onClick={() => toggleClick()}>
+        <IconButton
+          size={isReallySmallScreen ? "small" : "medium"}
+          onClick={() => setShowText(!showText)}
+        >
+          <AbcIcon fontSize="large" />
+        </IconButton>
+        <IconButton
+          size={isReallySmallScreen ? "small" : "medium"}
+          onClick={() => toggleClick()}
+        >
           {mode === "light" ? (
             <Brightness2Icon fontSize="large" />
           ) : (

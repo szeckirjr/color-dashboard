@@ -25,8 +25,8 @@ export default function HueColors({
   });
   // console.log(colors);
   return (
-    <Stack width="100%">
-      <Typography variant={isSmallScreen ? "h5" : "h4"} fontWeight="500">
+    <Stack width="50%">
+      <Typography variant={isSmallScreen ? "h6" : "h5"} fontWeight="500">
         Hue
       </Typography>
       <Box
